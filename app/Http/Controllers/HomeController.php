@@ -23,7 +23,8 @@ class HomeController extends Controller
 
     public function game(Request $request)
     {
-        $result = $this->service->handleRandomNumber($request);
+        $guessNumber = $request->get('guess_number');
+        $result = $this->service->handleRandomNumber($guessNumber);
 
         return response()->json([
             'data' => $result,
@@ -34,10 +35,10 @@ class HomeController extends Controller
     public function history(Request $request)
     {
         $models = $this->service->getLists($request);
-        if ($request->ajax()){
+        if ($request->ajax()) {
             return Datatables::of($models)->make(true);
         }
-        
+
         return view('history', compact('models'));
     }
 }

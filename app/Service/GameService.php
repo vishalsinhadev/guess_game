@@ -17,10 +17,9 @@ class GameService
         return $history;
     }
 
-    public function handleRandomNumber($request)
+    public function handleRandomNumber($guessNumber)
     {
         $data = [];
-        $guessNumber = $request->get('guess_number');
         $computerGuessNumber = rand(0, 100);
         if ($guessNumber == $computerGuessNumber) {
             $data['message'] = 'Bingo';
