@@ -36,7 +36,9 @@
     	<div class="container mt-6 h-100">
     		<div class="row justify-content-center align-items-center h-100">
     			<div class="col-lg-8">
+    			
     				<div class="shadow p-5">
+    					 <a href="{{ route('history') }}" class="btn btn-primary pull-right" style="float: right">History</a>	
     					 <form action="{{ route('game') }}" method="POST" id="game-form">
     					 	@csrf
                         	<h3>Enter Your Guess Number</h3>
@@ -46,6 +48,8 @@
                         	
                         	<div class="form-group">
                         		<input type="submit" class="btn btn-success" value="Guess">
+                        		<span class="status"></span>
+                        		
                         	</div>
                         </form>
            
@@ -68,12 +72,16 @@
 		        type: "Post",
 		        async: true,
 		        data: form.serialize(),
+		        beforeSend: function() {
+		        	$('.status').html("Checking... ");
+		        },
 		        success: function (data) {
 			       console.log('error', data);
 		           if(data.error == false){
-						alert(data.data.message);
+						$('.status').html('<span class="label label-success">'+data.data.message+'</span>');
+						$('.status').slideDown();
 			       }
-			       location.href = '/history';
+			       //location.href = '/history';
 		        },
 		        error: function (xhr, exception) {
 		            var msg = xhr.responseText;

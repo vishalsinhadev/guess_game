@@ -45,6 +45,9 @@ class GuessGame extends Command
         } else {
             $result = (new GameService())->handleRandomNumber($guessNumber);
             $this->info($result['message']);
+            if ($result['message'] != 'Bingo') {
+                $this->handle();
+            }
         }
         return Command::SUCCESS;
     }
