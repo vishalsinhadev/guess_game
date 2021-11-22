@@ -1,0 +1,7 @@
+.child-row-custom {
+	display: none;
+}
+
+.child-row-shown {
+ 	display: table-row;
+}
